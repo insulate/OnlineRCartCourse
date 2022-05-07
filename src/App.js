@@ -1,13 +1,18 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NavBar from '../src/components/NavBar.js'
 import Footer from "./components/Footer";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
     <>
       <NavBar />
-      <HomePage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="about" element={<AboutPage />} />
+      </Routes>
       <Footer />
     </>
   );
