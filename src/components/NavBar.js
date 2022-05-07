@@ -1,8 +1,9 @@
 import React from 'react'
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
+    const navigate = useNavigate();
     return (
         <>
             <Navbar bg="success" expand="lg" variant='dark'>
@@ -17,12 +18,14 @@ const NavBar = () => {
                             <Link className='nav-link' to='/'>Home</Link>
                             <Link className='nav-link' to='/about'>About</Link>
                             <Link className='nav-link' to='/product'>Product</Link>
-                            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                            <NavDropdown title="Workshop (pagination + CRUD)" id="basic-nav-dropdown">
+                                <NavDropdown.Item onClick={() => {
+                                    navigate('/hospital')
+                                }}>ข้อมูลสถานพยาบาล (pagination)</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => {
+                                    navigate('/')
+                                }}>หมวดหมู่ข่าว</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
