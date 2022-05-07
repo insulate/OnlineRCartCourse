@@ -43,7 +43,6 @@ const CreatePage = () => {
                     </Form>
                 </Col>
             </Row>
-
         </Container>
     )
 }
