@@ -18,6 +18,7 @@ const NavBar = () => {
                             <Link className='nav-link' to='/'>Home</Link>
                             <Link className='nav-link' to='/about'>About</Link>
                             <Link className='nav-link' to='/product'>Product</Link>
+                            <Link className='nav-link' to='/upload'>Upload</Link>
                             <NavDropdown title="Workshop (pagination + CRUD)" id="basic-nav-dropdown">
                                 <NavDropdown.Item onClick={() => {
                                     navigate('/hospital')
