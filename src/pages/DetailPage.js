@@ -65,7 +65,7 @@ const DetailPage = () => {
                                 detail.length > 0 ? (
                                     detail.map((item, index) => {
                                         return (
-                                            <div className='col-md-4 mt-4'>
+                                            <div className='col-md-4 mt-4' key={index}>
                                                 <Card>
                                                     <Card.Body>
                                                         <Card.Title>{item.title}</Card.Title>

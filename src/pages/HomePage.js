@@ -63,19 +63,15 @@ const HomePage = () => {
                         {
                             data.data.map((news, index) => {
                                 return (
-                                    <>
-                                        <div className="col-md-4" key={index}>
+                                    <div key={index}>
+                                        <div className="col-md-4" >
                                             <h2>{news.topic}</h2>
                                             <p>{news.detail}</p>
                                         </div>
-                                    </>
+                                    </div>
                                 )
                             })
                         }
-                        <div className="col-md-4">
-
-
-                        </div>
                     </div>
                     <hr />
                 </div> {/* /container */}

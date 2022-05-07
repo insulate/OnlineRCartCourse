@@ -9,7 +9,7 @@ const NavBar = () => {
             <Navbar bg="success" expand="lg" variant='dark'>
                 <Container>
                     <Link className='navbar-brand' to="/">
-                        <img src='./logo192.png' alt='logo' width='30' height='30' className='d-inline-block align-top' />
+                        <img src={window.location.origin + '/logo192.png'} alt='logo' width='30' height='30' className='d-inline-block align-top' />
                         {' '} CodingThailand
                     </Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,7 +24,7 @@ const NavBar = () => {
                                 }}>ข้อมูลสถานพยาบาล (pagination)</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={() => {
-                                    navigate('/')
+                                    navigate('/category')
                                 }}>หมวดหมู่ข่าว</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
