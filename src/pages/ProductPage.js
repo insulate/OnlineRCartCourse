@@ -87,7 +87,7 @@ const ProductPage = () => {
                                                 <Image thumbnail src={p.picture} alt={p.title} width='100px' />
                                             </td>
                                             <td>
-                                                <Link to='/detail'>
+                                                <Link to={`/detail/${p.id}/title/${p.title}`}>
                                                     <BsEyeFill />
                                                 </Link>
                                             </td>

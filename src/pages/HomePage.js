@@ -1,5 +1,6 @@
 import React from 'react'
 import { BsFillHeartFill } from 'react-icons/bs'
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
     return (
@@ -8,11 +9,11 @@ const HomePage = () => {
                 {/* Main jumbotron for a primary marketing message or call to action */}
                 <div className="jumbotron">
                     <div className="container">
-                        <h1 className="display-3">Hello, world!</h1>
-                        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                        <h1 className="display-3">Welcome to my website online course</h1>
+                        <p>this web use React for development {' '} <BsFillHeartFill color='red' size='2em' /> </p>
                         <p>
-                            <BsFillHeartFill color='red' size='2em' /> {' '}
-                            <button className="btn btn-primary btn-lg" role="presentation">Learn more »</button>
+
+                            <Link className="btn btn-primary btn-lg" role="button" to="product">All Products »</Link>
                         </p>
                     </div>
                 </div>
@@ -22,17 +23,17 @@ const HomePage = () => {
                         <div className="col-md-4">
                             <h2>Heading</h2>
                             <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                            <p><a className="btn btn-secondary" href="#!" role="button">View details »</a></p>
+
                         </div>
                         <div className="col-md-4">
                             <h2>Heading</h2>
                             <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                            <p><a className="btn btn-secondary" href="#!" role="button">View details »</a></p>
+
                         </div>
                         <div className="col-md-4">
                             <h2>Heading</h2>
                             <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                            <p><a className="btn btn-secondary" href="#!" role="button">View details »</a></p>
+
                         </div>
                     </div>
                     <hr />
