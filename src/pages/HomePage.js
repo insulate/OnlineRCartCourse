@@ -1,8 +1,48 @@
 import React from 'react'
+import { useQuery } from 'react-query'
 import { BsFillHeartFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 
 const HomePage = () => {
+
+    // const { isLoading, error, data } = useQuery('getData', () =>
+    //     fetch('https://api.codingthailand.com/api/news?page=1&per_page=3').then(res =>
+    //         res.json()
+    //     )
+    // )
+
+    const query = useQuery('getData', () => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+        const promise = fetch('https://api.codingthailand.com/api/news?page=1&per_page=3', {
+            method: 'get', signal: signal
+        }).then(res =>
+            res.json()
+        )
+        //cancel request
+        promise.cancel = () => controller.abort();
+        return promise;
+    })
+
+    const { isLoading, error, data } = query;
+
+    if (isLoading === true) {
+        return (
+            <div className='text-center mt-5'>
+                <Spinner animation="border" variant="primary" />
+            </div>
+        )
+    }
+    if (error === true) {
+        return (
+            <div className='text-center mt-5'>
+                <p>เกิดข้อผิดพลาด กรุณาลองใหม่!</p>
+                <p>เ{JSON.stringify(error)}</p>
+            </div>
+        )
+    }
+
     return (
         <>
             <main role="main">
@@ -20,19 +60,20 @@ const HomePage = () => {
                 <div className="container">
                     {/* Example row of columns */}
                     <div className="row">
+                        {
+                            data.data.map((news, index) => {
+                                return (
+                                    <>
+                                        <div className="col-md-4" key={index}>
+                                            <h2>{news.topic}</h2>
+                                            <p>{news.detail}</p>
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
                         <div className="col-md-4">
-                            <h2>Heading</h2>
-                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 
-                        </div>
-                        <div className="col-md-4">
-                            <h2>Heading</h2>
-                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-
-                        </div>
-                        <div className="col-md-4">
-                            <h2>Heading</h2>
-                            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 
                         </div>
                     </div>
