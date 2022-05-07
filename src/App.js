@@ -16,26 +16,34 @@ import CategoryIndexPage from "./pages/category/IndexPage";
 import CategoryCreatePage from "./pages/category/CreatePage";
 import CategoryEditPage from "./pages/category/EditPage";
 import UploadPage from "./pages/UploadPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+
+import PrivateRoute from "./guard/PrivateRoute";
 
 const queryClient = new QueryClient()
 function App() {
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <ToastContainer />
         <NavBar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route index path="/" element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="product" element={<ProductPage />} />
           <Route path="detail/:id/title/:title" element={<DetailPage />} />
-          <Route path="hospital" element={<HospitalPage />} />
+          {/* private route  */}
+          <Route path="hospital" element={<PrivateRoute><HospitalPage /></PrivateRoute>} />
+          <Route path="category" element={<PrivateRoute><CategoryIndexPage /></PrivateRoute>} />
+          <Route path="category/create" element={<PrivateRoute><CategoryCreatePage /></PrivateRoute>} />
+          <Route path="category/edit/:id" element={<PrivateRoute><CategoryEditPage /></PrivateRoute>} />
+          <Route path="upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
+          {/* end private route  */}
 
-          <Route path="category" element={<CategoryIndexPage />} />
-          <Route path="category/create" element={<CategoryCreatePage />} />
-          <Route path="category/edit/:id" element={<CategoryEditPage />} />
-
-          <Route path="upload" element={<UploadPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
         </Routes>
         <Footer />
       </QueryClientProvider>
