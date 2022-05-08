@@ -7,6 +7,18 @@ const NavBar = () => {
     const navigate = useNavigate();
     const userStore = React.useContext(UserStoreContext);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getProfile = () => {
+        const profileValue = JSON.parse(localStorage.getItem('profile'));
+        if (profileValue) {
+            userStore.updateProfile(profileValue);
+        }
+    }
+    React.useEffect(() => {
+        getProfile();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('profile');
@@ -28,6 +40,10 @@ const NavBar = () => {
                             <Link className='nav-link' to='/about'>About</Link>
                             <Link className='nav-link' to='/product'>Product</Link>
                             <Link className='nav-link' to='/upload'>Upload</Link>
+                            {
+                                userStore.profile && (<Link className='nav-link' to='/member'>Member</Link>)
+                            }
+
                             <NavDropdown title="Workshop (pagination + CRUD)" id="basic-nav-dropdown">
                                 <NavDropdown.Item onClick={() => {
                                     navigate('/hospital')

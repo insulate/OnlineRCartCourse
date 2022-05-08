@@ -20,6 +20,7 @@ import CategoryEditPage from "./pages/category/EditPage";
 import UploadPage from "./pages/UploadPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import MemberPage from "./pages/MemberPage.js";
 
 import PrivateRoute from "./guard/PrivateRoute";
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="category/create" element={<PrivateRoute><CategoryCreatePage /></PrivateRoute>} />
             <Route path="category/edit/:id" element={<PrivateRoute><CategoryEditPage /></PrivateRoute>} />
             <Route path="upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
+            <Route path="member" element={<PrivateRoute><MemberPage /></PrivateRoute>} />
             {/* end private route  */}
 
             <Route path="login" element={<LoginPage />} />
