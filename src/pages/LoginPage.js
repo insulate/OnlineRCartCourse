@@ -6,6 +6,7 @@ import * as yup from "yup";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { UserStoreContext } from '../context/UserContext';
 
 const schema = yup.object({
     email: yup.string().required('อีเมล์ห้ามว่าง').email('รูปแบบอีเมล์ไม่ถูกต้อง'),
@@ -14,6 +15,7 @@ const schema = yup.object({
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const userStore = React.useContext(UserStoreContext);
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
@@ -59,10 +61,12 @@ const LoginPage = () => {
                 }
             });
             localStorage.setItem('profile', JSON.stringify(respProfile.data.data.user));
-
+            // navigate(0);
+            // update profile by context
+            const profileVale = JSON.parse(localStorage.getItem('profile'));
+            userStore.updateProfile(profileVale);
             notifySuccess('เข้าสู่ระบบเรียบร้อยแล้ว');
             navigate('/');
-            navigate(0);
         } catch (error) {
             notifyDanger(error.response.data.message);
         }

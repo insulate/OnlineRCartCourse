@@ -5,6 +5,8 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
+import UserStoreProvider from "./context/UserContext";
+
 import HomePage from "./pages/HomePage";
 import NavBar from '../src/components/NavBar.js'
 import Footer from "./components/Footer";
@@ -26,27 +28,29 @@ function App() {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <ToastContainer />
-        <NavBar />
-        <Routes>
-          <Route index path="/" element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="product" element={<ProductPage />} />
-          <Route path="detail/:id/title/:title" element={<DetailPage />} />
-          {/* private route  */}
-          <Route path="hospital" element={<PrivateRoute><HospitalPage /></PrivateRoute>} />
-          <Route path="category" element={<PrivateRoute><CategoryIndexPage /></PrivateRoute>} />
-          <Route path="category/create" element={<PrivateRoute><CategoryCreatePage /></PrivateRoute>} />
-          <Route path="category/edit/:id" element={<PrivateRoute><CategoryEditPage /></PrivateRoute>} />
-          <Route path="upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
-          {/* end private route  */}
+      <UserStoreProvider>
+        <QueryClientProvider client={queryClient}>
+          <ToastContainer />
+          <NavBar />
+          <Routes>
+            <Route index path="/" element={<HomePage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="product" element={<ProductPage />} />
+            <Route path="detail/:id/title/:title" element={<DetailPage />} />
+            {/* private route  */}
+            <Route path="hospital" element={<PrivateRoute><HospitalPage /></PrivateRoute>} />
+            <Route path="category" element={<PrivateRoute><CategoryIndexPage /></PrivateRoute>} />
+            <Route path="category/create" element={<PrivateRoute><CategoryCreatePage /></PrivateRoute>} />
+            <Route path="category/edit/:id" element={<PrivateRoute><CategoryEditPage /></PrivateRoute>} />
+            <Route path="upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
+            {/* end private route  */}
 
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-        </Routes>
-        <Footer />
-      </QueryClientProvider>
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+          </Routes>
+          <Footer />
+        </QueryClientProvider>
+      </UserStoreProvider>
     </>
   );
 }

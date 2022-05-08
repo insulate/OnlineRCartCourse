@@ -1,20 +1,11 @@
 import React from 'react'
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
+import { UserStoreContext } from '../context/UserContext';
 
 const NavBar = () => {
     const navigate = useNavigate();
-    const [profile, setProfile] = React.useState(null);
-
-    const getProfile = () => {
-        const profileValue = JSON.parse(localStorage.getItem('profile'));
-        if (profileValue) {
-            setProfile(profileValue);
-        }
-    }
-    React.useEffect(() => {
-        getProfile();
-    }, [])
+    const userStore = React.useContext(UserStoreContext);
 
     const logout = () => {
         localStorage.removeItem('token');
@@ -49,9 +40,9 @@ const NavBar = () => {
                         </Nav>
 
                         {
-                            profile ? (
+                            userStore.profile ? (
                                 <>
-                                    <span className='navbar-text text-white'>ยินดีต้อนรับคุณ {profile.name} role: {profile.role}</span>
+                                    <span className='navbar-text text-white'>ยินดีต้อนรับคุณ {userStore.profile.name} role: {userStore.profile.role}</span>
                                     <button className='btn btn-danger ml-2' onClick={logout} >logout</button>
                                 </>
                             ) : (
