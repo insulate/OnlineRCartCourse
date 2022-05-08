@@ -1,17 +1,23 @@
 import React from 'react'
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserStoreContext } from '../context/UserContext';
+import { UserStoreContext } from '../context/UserContext'; // context
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { updateProfile } from '../redux/actions/authAction';
 
 const NavBar = () => {
     const navigate = useNavigate();
-    const userStore = React.useContext(UserStoreContext);
+    // const userStore = React.useContext(UserStoreContext); // context
+    //redux
+    const profileRedux = useSelector(state => state.authReducer.profile);
+    const dispatch = useDispatch();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // redux
     const getProfile = () => {
         const profileValue = JSON.parse(localStorage.getItem('profile'));
         if (profileValue) {
-            userStore.updateProfile(profileValue);
+            dispatch(updateProfile(profileValue));
         }
     }
     React.useEffect(() => {
@@ -41,7 +47,7 @@ const NavBar = () => {
                             <Link className='nav-link' to='/product'>Product</Link>
                             <Link className='nav-link' to='/upload'>Upload</Link>
                             {
-                                userStore.profile && (<Link className='nav-link' to='/member'>Member</Link>)
+                                profileRedux && (<Link className='nav-link' to='/member'>Member</Link>)
                             }
 
                             <NavDropdown title="Workshop (pagination + CRUD)" id="basic-nav-dropdown">
@@ -56,9 +62,12 @@ const NavBar = () => {
                         </Nav>
 
                         {
-                            userStore.profile ? (
+                            profileRedux ? (
                                 <>
-                                    <span className='navbar-text text-white'>ยินดีต้อนรับคุณ {userStore.profile.name} role: {userStore.profile.role}</span>
+                                    {/* <span className='navbar-text text-white'>ยินดีต้อนรับคุณ {userStore.profile.name} role: {userStore.profile.role}</span> */}
+                                    <span className='navbar-text text-white'>
+                                        ยินดีต้อนรับคุณ {profileRedux.name} role: {profileRedux.role}
+                                    </span>
                                     <button className='btn btn-danger ml-2' onClick={logout} >logout</button>
                                 </>
                             ) : (

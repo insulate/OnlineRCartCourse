@@ -1,11 +1,13 @@
 import React from "react";
 import { ToastContainer } from 'react-toastify'; // https://fkhadra.github.io/react-toastify/installation
 import { Routes, Route } from "react-router-dom";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import UserStoreProvider from "./context/UserContext";
+// redux setup
+import { Provider } from "react-redux";
+// createStore is deprecated and configureStore is recommended
+import { createStore } from "redux";
+import rootReducer from "./redux/reducers";
 
 import HomePage from "./pages/HomePage";
 import NavBar from '../src/components/NavBar.js'
@@ -24,11 +26,13 @@ import MemberPage from "./pages/MemberPage.js";
 
 import PrivateRoute from "./guard/PrivateRoute";
 
+const store = createStore(rootReducer);
+
 const queryClient = new QueryClient()
 function App() {
 
   return (
-    <>
+    <Provider store={store}>
       <UserStoreProvider>
         <QueryClientProvider client={queryClient}>
           <ToastContainer />
@@ -53,7 +57,7 @@ function App() {
           <Footer />
         </QueryClientProvider>
       </UserStoreProvider>
-    </>
+    </Provider>
   );
 }
 
