@@ -5,8 +5,10 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import UserStoreProvider from "./context/UserContext";
 // redux setup
 import { Provider } from "react-redux";
+
 // createStore is deprecated and configureStore is recommended
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from 'redux-thunk';
 import rootReducer from "./redux/reducers";
 
 import HomePage from "./pages/HomePage";
@@ -27,7 +29,7 @@ import MemberPage from "./pages/MemberPage.js";
 import PrivateRoute from "./guard/PrivateRoute";
 import CartPage from "./pages/CartPage";
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const queryClient = new QueryClient()
 function App() {
