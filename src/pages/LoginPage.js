@@ -6,7 +6,7 @@ import * as yup from "yup";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { UserStoreContext } from '../context/UserContext';
+// import { UserStoreContext } from '../context/UserContext';
 
 import { useDispatch } from 'react-redux'; // for call actions from redux
 import { updateProfile } from '../redux/actions/authAction';

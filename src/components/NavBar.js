@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserStoreContext } from '../context/UserContext'; // context
+// import { UserStoreContext } from '../context/UserContext'; // context
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProfile } from '../redux/actions/authAction';
@@ -11,6 +11,7 @@ const NavBar = () => {
     // const userStore = React.useContext(UserStoreContext); // context
     //redux
     const profileRedux = useSelector(state => state.authReducer.profile);
+    const total = useSelector(state => state.cartReducer.total);
     const dispatch = useDispatch();
 
     // redux
@@ -43,22 +44,28 @@ const NavBar = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             <Link className='nav-link' to='/'>Home</Link>
-                            <Link className='nav-link' to='/about'>About</Link>
+                            {/* <Link className='nav-link' to='/about'>About</Link> */}
                             <Link className='nav-link' to='/product'>Product</Link>
                             <Link className='nav-link' to='/upload'>Upload</Link>
+                            <Link className='nav-link' to='/cart'>Cart {total} ชิ้น</Link>
                             {
-                                profileRedux && (<Link className='nav-link' to='/member'>Member</Link>)
+                                profileRedux && (
+                                    <>
+                                        <NavDropdown title="Workshop (pagination + CRUD)" id="basic-nav-dropdown">
+                                            <NavDropdown.Item onClick={() => {
+                                                navigate('/hospital')
+                                            }}>ข้อมูลสถานพยาบาล (pagination)</NavDropdown.Item>
+                                            <NavDropdown.Divider />
+                                            <NavDropdown.Item onClick={() => {
+                                                navigate('/category')
+                                            }}>หมวดหมู่ข่าว</NavDropdown.Item>
+                                        </NavDropdown>
+                                    </>
+
+                                )
                             }
 
-                            <NavDropdown title="Workshop (pagination + CRUD)" id="basic-nav-dropdown">
-                                <NavDropdown.Item onClick={() => {
-                                    navigate('/hospital')
-                                }}>ข้อมูลสถานพยาบาล (pagination)</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={() => {
-                                    navigate('/category')
-                                }}>หมวดหมู่ข่าว</NavDropdown.Item>
-                            </NavDropdown>
+
                         </Nav>
 
                         {

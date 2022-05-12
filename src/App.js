@@ -25,6 +25,7 @@ import RegisterPage from "./pages/RegisterPage";
 import MemberPage from "./pages/MemberPage.js";
 
 import PrivateRoute from "./guard/PrivateRoute";
+import CartPage from "./pages/CartPage";
 
 const store = createStore(rootReducer);
 
@@ -49,6 +50,7 @@ function App() {
             <Route path="category/edit/:id" element={<PrivateRoute><CategoryEditPage /></PrivateRoute>} />
             <Route path="upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
             <Route path="member" element={<PrivateRoute><MemberPage /></PrivateRoute>} />
+            <Route path="cart" element={<PrivateRoute><CartPage /></PrivateRoute>} />
             {/* end private route  */}
 
             <Route path="login" element={<LoginPage />} />

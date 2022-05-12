@@ -6,12 +6,22 @@ import { th } from 'date-fns/locale';
 import { BsEyeFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
+//redux
+import { addToCart } from '../redux/actions/cartAction';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 const ProductPage = () => {
     const [product, setProduct] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(false);
     const cancelToken = React.useRef(null);
+
+    const dispatch = useDispatch();
+    const cart = useSelector(state => state.cartReducer.cart);
+    // const total = useSelector(state => state.cartReducer.total);
+
+
     const getData = async () => {
         try {
             setLoading(true);
@@ -52,6 +62,17 @@ const ProductPage = () => {
             </div>
         )
     }
+    const addCart = (p) => {
+        // console.log(p)
+        const product = {
+            id: p.id,
+            name: p.title,
+            price: p.view, // สมมุตว่า p.view คือราคา
+            qty: 1
+        }
+        // call action
+        dispatch(addToCart(product, cart));
+    }
     return (
         <div className='container'>
             <div className='row'>
@@ -90,6 +111,10 @@ const ProductPage = () => {
                                                 <Link to={`/detail/${p.id}/title/${p.title}`}>
                                                     <BsEyeFill />
                                                 </Link>
+                                                <button
+                                                    onClick={() => addCart(p)}
+                                                    className='btn btn-outline-success ml-2'
+                                                >หยิบใส่ตระกร้า</button>
                                             </td>
                                         </tr>
                                     )
